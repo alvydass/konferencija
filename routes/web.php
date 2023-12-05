@@ -87,3 +87,18 @@ Route::get('/konferencija/{id}/informacija', function ($id) {
         return 'Konferencija nerasta';
     }
 })->name('konferencija_informacija');
+
+
+Route::get('/administratorius', function () {
+    return view('administratorius');
+})->name('administratorius');
+
+Route::get('/naudotojai', function () {
+    // Čia gali būti logika, kuri gražina visų naudotojų sąrašą
+    return "Sistemos naudotojų sąrašas";
+})->name('naudotojai');
+
+Route::get('/naudotojai/{id}/redaguoti', function ($id) {
+    // Čia gali būti logika redagavimo puslapio atvaizdavimui
+    return view('redagavimo_puslapis', ['naudotojo_id' => $id]);
+})->name('redaguoti_naudotoja');
