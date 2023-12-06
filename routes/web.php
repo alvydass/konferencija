@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,40 +19,19 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::get('/klientas', function () {
-    return "Kliento posistemis - Jūs esate klientas";
-})->name('klientas');
+Route::get('/client', function () {
+    return view('client.client');
+})->name('client');
 
-Route::get('/darbuotojas', function () {
-    return "Darbuotojo posistemis - Jūs esate darbuotojas";
-})->name('darbuotojas');
+Route::prefix('client')->group(function () {
+    Route::get('/', [ClientController::class, 'index'])->name('client'); //
+});
 
-Route::get('/administratorius', function () {
-    return "Sistemos administratoriaus posistemis - Jūs esate administratorius";
-})->name('administratorius');
-
-Route::get('/klientas', function () {
-    return view('klientas');
-})->name('klientas');
-
-Route::get('/konferencija/{id}', function ($id) {
-    $konferencijos = [
-        1 => [
-            'pavadinimas' => 'Pirma konferencija',
-            'aprasymas' => 'Aprašymas apie pirmą konferenciją...'
-        ],
-        2 => [
-            'pavadinimas' => 'Antra konferencija',
-            'aprasymas' => 'Aprašymas apie antrą konferenciją...'
-        ],
-    ];
-
-    if (array_key_exists($id, $konferencijos)) {
-        return view('konferencija', ['konferencija' => $konferencijos[$id]]);
-    } else {
-        return 'Konferencija nerasta';
-    }
-})->name('konferencija');
+Route::prefix('conference')->group(function () {
+    Route::get('show/{id}', [ConferenceController::class, 'show'])->name('conference.show');
+    Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
+    Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
+});
 
 Route::get('/darbuotojas', function () {
     return view('darbuotojas');
@@ -102,3 +83,9 @@ Route::get('/naudotojai/{id}/redaguoti', function ($id) {
     // Čia gali būti logika redagavimo puslapio atvaizdavimui
     return view('redagavimo_puslapis', ['naudotojo_id' => $id]);
 })->name('redaguoti_naudotoja');
+
+Route::get('/konferencijos', 'ConferenceController@index')->name('konferenciju_sarasas');
+Route::get('/konferencijos/kurti', 'ConferenceController@create')->name('konferenciju_kurimas');
+Route::post('/konferencijos/sukurti', 'ConferenceController@store')->name('konferenciju_sukurimas');
+Route::get('/konferencijos/redaguoti/{id}', 'ConferenceController@edit')->name('konferenciju_redagavimas');
+Route::post('/konferencijos/redaguoti/{id}', 'ConferenceController@update')->name('konferenciju_keitimas');
