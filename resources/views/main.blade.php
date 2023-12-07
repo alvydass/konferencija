@@ -8,5 +8,5 @@
 
     <p><a href="{{ route('client') }}" onclick="showLoading()">{{ __('client') }}</a></p>
     <p><a href="{{ route('employee') }}" onclick="showLoading()">{{ __('employee') }}</a></p>
-    <p><a href="{{ route('administratorius') }}" onclick="showLoading()">{{ __('admin') }}</a></p>
+    <p><a href="{{ route('admin') }}" onclick="showLoading()">{{ __('admin') }}</a></p>
 @endsection

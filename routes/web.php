@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\ClientController;
@@ -36,16 +38,24 @@ Route::prefix('conference')->group(function () {
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
 });
 
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin');
+});
+
+Route::prefix('user')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('user');
+    Route::get('{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('{id}', [UserController::class, 'update'])->name('user.update');
+});
+
 Route::get('/visos-konferencijos', function () {
     return view('visos_konferencijos');
 })->name('visos_konferencijos');
 
-Route::get('/administratorius', function () {
-    return view('administratorius');
-})->name('administratorius');
 
-Route::get('/naudotojai', function () {
-    // Čia gali būti logika, kuri gražina visų naudotojų sąrašą
+
+Route::get('/users', function () {
+
     return "Sistemos naudotojų sąrašas";
 })->name('naudotojai');
 

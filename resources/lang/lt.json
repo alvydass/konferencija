@@ -14,5 +14,11 @@
     "client":"Kliento posistemis",
     "employee": "Darbuotojo posistemis",
     "admin": "Administratoriaus posistemis",
-    "registered_clients": "Užsiregistravę klientai"
+    "registered_clients": "Užsiregistravę klientai",
+    "admin_subsystem": "Administratoriaus posistemis",
+    "user_data_management": "Sistemos naudotojų duomenų valdymas",
+    "conference_management": "Konferencijų valdymas",
+    "user_list": "Naudotojų sąrašas",
+    "edit": "Redaguoti",
+    "save": "Išsaugoti"
 }

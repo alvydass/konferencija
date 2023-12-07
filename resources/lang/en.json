@@ -1,5 +1,5 @@
 {
-    "conference_list": "Konferencijų sąrašas",
+    "conference_list": "Conference list",
     "view": "View",
     "register": "Register",
     "conference_info": "Conference information",
@@ -14,5 +14,11 @@
     "client":"Client menu",
     "employee": "Employee menu",
     "admin": "Admin menu",
-    "registered_clients": "Registered clients"
+    "registered_clients": "Registered clients",
+    "admin_subsystem": "Administrator subsystem",
+    "user_data_management": "User data management",
+    "conference_management": "Conference management",
+    "user_list": "User list",
+    "edit": "Edit",
+    "save": "Save"
 }
