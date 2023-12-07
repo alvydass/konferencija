@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Conference Information</h1>
-    <p><strong>Title:</strong> {{ $conference->title }}</p>
-    <p><strong>Description:</strong> {{ $conference->description }}</p>
-    <p><strong>BYBAN:</strong> {{ $conference->description }}</p>
+    <h1>{{ __('conference_info') }}</h1>
+    <p><strong>{{ __('title') }}:</strong> {{ $conference->title }}</p>
+    <p><strong>{{ __('description') }}:</strong> {{ $conference->description }}</p>
 @endsection
