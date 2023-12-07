@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\ClientController;
@@ -19,56 +20,25 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::get('/client', function () {
-    return view('client.client');
-})->name('client');
 
 Route::prefix('client')->group(function () {
-    Route::get('/', [ClientController::class, 'index'])->name('client'); //
+    Route::get('/', [ClientController::class, 'index'])->name('client');
+});
+
+Route::prefix('employee')->group(function () {
+    Route::get('/', [EmployeeController::class, 'index'])->name('employee');
 });
 
 Route::prefix('conference')->group(function () {
     Route::get('show/{id}', [ConferenceController::class, 'show'])->name('conference.show');
+    Route::get('show-with-clients/{id}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
 });
 
-Route::get('/darbuotojas', function () {
-    return view('darbuotojas');
-})->name('darbuotojas');
-
 Route::get('/visos-konferencijos', function () {
     return view('visos_konferencijos');
 })->name('visos_konferencijos');
-
-Route::get('/konferencija/{id}/informacija', function ($id) {
-    $konferencijos = [
-        1 => [
-            'pavadinimas' => 'Pirma konferencija',
-            'aprasymas' => 'Aprašymas apie pirmą konferenciją...',
-            'registracija' => [
-                'Jonas Jonaitis',
-                'Petras Petrauskas',
-                'Ona Onaitė'
-            ]
-        ],
-        2 => [
-            'pavadinimas' => 'Antra konferencija',
-            'aprasymas' => 'Aprašymas apie antrą konferenciją...',
-            'registracija' => [
-                'Marytė Marijampolė',
-                'Antanas Antanaitis'
-            ]
-        ],
-    ];
-
-    if (array_key_exists($id, $konferencijos)) {
-        return view('konferencija_informacija', ['konferencija' => $konferencijos[$id]]);
-    } else {
-        return 'Konferencija nerasta';
-    }
-})->name('konferencija_informacija');
-
 
 Route::get('/administratorius', function () {
     return view('administratorius');

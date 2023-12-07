@@ -6,5 +6,13 @@
     "title": "Pavadinimas",
     "description": "Aprašymas",
     "full_name": "Vardas ir Pavardė",
-    "email": "El. paštas"
+    "email": "El. paštas",
+    "first_name": "Vardas",
+    "last_name": "Pavardė",
+    "course_group": "Grupė",
+    "student_info_title": "Studento informacija",
+    "client":"Kliento posistemis",
+    "employee": "Darbuotojo posistemis",
+    "admin": "Administratoriaus posistemis",
+    "registered_clients": "Užsiregistravę klientai"
 }

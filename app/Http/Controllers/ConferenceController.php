@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Conference;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
@@ -10,8 +11,27 @@ class ConferenceController extends BaseController
 {
     public function show($id)
     {
-        $conference = new Conference('1', 'Conference Title', 'Conference Description');
-        return view('conference.show', ['conference' => $conference]);
+        $conference = new Conference(1, 'AI threat', 'Call Arnie');
+
+        //dd($showClients);
+
+
+        return view('conference.show', compact('conference'));
+    }
+
+    public function showWithClients($id)
+    {
+        $conference = new Conference(1, 'AI threat', 'Call Arnie');
+        $client1 = new Client('Simas', 'Palaukys', 'simka@one.lt');
+        $client2 = new Client('Laurynas', 'Blynas', 'destroyer999@one.lt');
+
+        $conference->addClient($client1);
+        $conference->addClient($client2);
+
+        //dd($showClients);
+
+
+        return view('conference.show-with-clients', compact('conference'));
     }
 
     public function register($id)
