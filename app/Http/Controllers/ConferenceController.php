@@ -28,8 +28,6 @@ class ConferenceController extends BaseController
         $conference->addClient($client1);
         $conference->addClient($client2);
 
-        //dd($showClients);
-
 
         return view('conference.show-with-clients', compact('conference'));
     }
@@ -47,5 +45,13 @@ class ConferenceController extends BaseController
     {
 
         return "Success";
+    }
+
+    public function list()
+    {
+        $conference = new Conference(1, 'AI threat', 'Call Arnie');
+
+        $conferences = [$conference];
+        return view('admin.conference.conferences', compact('conferences'));
     }
 }

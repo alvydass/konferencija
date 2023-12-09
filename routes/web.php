@@ -40,6 +40,7 @@ Route::prefix('conference')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
+    Route::get('conferences', [ConferenceController::class, 'list'])->name('conference.list');
 });
 
 Route::prefix('user')->group(function () {
@@ -47,10 +48,6 @@ Route::prefix('user')->group(function () {
     Route::get('{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('{id}', [UserController::class, 'update'])->name('user.update');
 });
-
-Route::get('/visos-konferencijos', function () {
-    return view('visos_konferencijos');
-})->name('visos_konferencijos');
 
 
 
