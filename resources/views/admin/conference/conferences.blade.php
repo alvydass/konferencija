@@ -10,14 +10,14 @@
             <li>
                 {{ $conference->title }}
 
-                <form method="GET" action="{{ route('conference-edit', ['id' => $conference->id]) }}" style="display: inline;">
+                <form method="GET" action="{{ route('conference-edit', ['encodedConference' => base64_encode(json_encode($conference))]) }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="btn btn-primary">Edit</button>
                 </form>
 
-                <form method="POST" action="{{ route('conference-delete', ['id' => $conference->id]) }}" style="display: inline;">
+                <form method="POST" action="{{ route('save-success', ['id' => $conference->id]) }}" style="display: inline;">
                     @csrf
-                    @method('DELETE')
+                    @method('POST')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this conference?')">Delete</button>
                 </form>
             </li>

@@ -69,25 +69,27 @@ class ConferenceController extends BaseController
         $conference = new Conference();
         $conference->title = $request->input('title');
         $conference->description = $request->input('description');
-        // ... (set other fields)
         $conference->save();
 
         // Redirect to the success page
         return redirect()->route('save-success');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $encodedConference)
     {
-        $conference = Conference::findOrFail($id); // Fetch the conference from the database
+        $decodedConference = json_decode(base64_decode($encodedConference), true);
+        $conference = new Conference($decodedConference['id'], $decodedConference['title'], $decodedConference['description']);
+
+        // Pass the $conference object to your edit view
         return view('conference.edit', compact('conference'));
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        $conference = Conference::findOrFail($id);
-        $conference->delete();
+       /* $conference = Conference::findOrFail($id);
+        $conference->delete();*/
 
-        return redirect()->route('conference-list')->with('success', 'Conference deleted successfully');
+        return redirect()->route('save-success');
     }
 
 }

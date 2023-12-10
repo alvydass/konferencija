@@ -37,8 +37,8 @@ Route::prefix('conference')->group(function () {
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
     Route::get('/add', [ConferenceController::class, 'create'])->name('conference-add');
-    Route::get('/conference/edit/{id}', [ConferenceController::class, 'edit'])->name('conference-edit');
-    Route::delete('/conference/delete/{id}', [ConferenceController::class, 'destroy'])->name('conference-delete');
+    Route::get('/conference/edit/{encodedConference}', [ConferenceController::class, 'edit'])->name('conference-edit');
+    Route::post('/conference/delete/{id}', [ConferenceController::class, 'delete'])->name('conference-delete');
 });
 
 Route::prefix('admin')->group(function () {
@@ -52,7 +52,7 @@ Route::prefix('user')->group(function () {
     Route::put('{id}', [UserController::class, 'update'])->name('user.update');
 });
 
-Route::get('/save-success', function () {
+Route::post('/save-success', function () {
     //return view('save_success');
     return "Save success";
 })->name('save-success');
