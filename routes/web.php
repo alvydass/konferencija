@@ -36,6 +36,9 @@ Route::prefix('conference')->group(function () {
     Route::get('show-with-clients/{id}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
+    Route::get('/add', [ConferenceController::class, 'create'])->name('conference-add');
+    Route::get('/conference/edit/{id}', [ConferenceController::class, 'edit'])->name('conference-edit');
+    Route::delete('/conference/delete/{id}', [ConferenceController::class, 'destroy'])->name('conference-delete');
 });
 
 Route::prefix('admin')->group(function () {
@@ -49,20 +52,8 @@ Route::prefix('user')->group(function () {
     Route::put('{id}', [UserController::class, 'update'])->name('user.update');
 });
 
+Route::get('/save-success', function () {
+    //return view('save_success');
+    return "Save success";
+})->name('save-success');
 
-
-Route::get('/users', function () {
-
-    return "Sistemos naudotojų sąrašas";
-})->name('naudotojai');
-
-Route::get('/naudotojai/{id}/redaguoti', function ($id) {
-    // Čia gali būti logika redagavimo puslapio atvaizdavimui
-    return view('redagavimo_puslapis', ['naudotojo_id' => $id]);
-})->name('redaguoti_naudotoja');
-
-Route::get('/konferencijos', 'ConferenceController@index')->name('konferenciju_sarasas');
-Route::get('/konferencijos/kurti', 'ConferenceController@create')->name('konferenciju_kurimas');
-Route::post('/konferencijos/sukurti', 'ConferenceController@store')->name('konferenciju_sukurimas');
-Route::get('/konferencijos/redaguoti/{id}', 'ConferenceController@edit')->name('konferenciju_redagavimas');
-Route::post('/konferencijos/redaguoti/{id}', 'ConferenceController@update')->name('konferenciju_keitimas');

@@ -54,4 +54,40 @@ class ConferenceController extends BaseController
         $conferences = [$conference];
         return view('admin.conference.conferences', compact('conferences'));
     }
+
+    public function create()
+    {
+        return view('conference.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validate and store conference data from the form
+        // You can use $request->input('field_name') to retrieve form data
+
+        // Example code to store data in a Conference model
+        $conference = new Conference();
+        $conference->title = $request->input('title');
+        $conference->description = $request->input('description');
+        // ... (set other fields)
+        $conference->save();
+
+        // Redirect to the success page
+        return redirect()->route('save-success');
+    }
+
+    public function edit($id)
+    {
+        $conference = Conference::findOrFail($id); // Fetch the conference from the database
+        return view('conference.edit', compact('conference'));
+    }
+
+    public function destroy($id)
+    {
+        $conference = Conference::findOrFail($id);
+        $conference->delete();
+
+        return redirect()->route('conference-list')->with('success', 'Conference deleted successfully');
+    }
+
 }
