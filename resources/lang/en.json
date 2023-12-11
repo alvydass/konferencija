@@ -20,5 +20,12 @@
     "conference_management": "Conference management",
     "user_list": "User list",
     "edit": "Edit",
-    "save": "Save"
+    "save": "Save",
+    "lecturer": "Lecturer",
+    "date": "Date",
+    "time": "Time",
+    "address": "address",
+    "edit_user_details": "Edit user details",
+    "add_new_conference": "Add new conference",
+    "delete": "Delete"
 }

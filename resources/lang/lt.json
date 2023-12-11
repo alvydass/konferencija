@@ -20,5 +20,12 @@
     "conference_management": "Konferencijų valdymas",
     "user_list": "Naudotojų sąrašas",
     "edit": "Redaguoti",
-    "save": "Išsaugoti"
+    "save": "Išsaugoti",
+    "lecturer": "Lektorius",
+    "date": "Data",
+    "time": "Laikas",
+    "address": "Adresas",
+    "edit_user_details": "Keisti vartotojo duomenis",
+    "add_new_conference": "Pridėti naują konferenciją",
+    "delete": "Ištrinti"
 }

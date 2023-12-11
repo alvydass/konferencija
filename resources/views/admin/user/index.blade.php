@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="loading-screen" id="loadingScreen">
-        Loading...
-    </div>
     <h1>{{ __('user_list') }}</h1>
 
     @foreach ($users as $user)

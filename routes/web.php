@@ -33,7 +33,7 @@ Route::prefix('employee')->group(function () {
 
 Route::prefix('conference')->group(function () {
     Route::get('show/{id}', [ConferenceController::class, 'show'])->name('conference.show');
-    Route::get('show-with-clients/{id}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
+    Route::get('conference/show-with-clients/{conference}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
     Route::get('/add', [ConferenceController::class, 'create'])->name('conference-add');
@@ -49,7 +49,7 @@ Route::prefix('admin')->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user');
     Route::get('{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('{id}', [UserController::class, 'update'])->name('user.update');
 });
 
 Route::post('/save-success', function () {
