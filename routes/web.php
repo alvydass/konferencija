@@ -57,3 +57,10 @@ Route::post('/save-success', function () {
     return "Save success";
 })->name('save-success');
 
+Route::get('/login', function () {
+    return "Login Page";
+})->name('login');
+
+Route::get('/logout', function () {
+    return "Logged out";
+})->name('logout');
