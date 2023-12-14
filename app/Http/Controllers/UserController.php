@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
 class UserController extends BaseController
 {
@@ -27,14 +28,12 @@ class UserController extends BaseController
 
     public function update(Request $request, $id)
     {
-        $user = new User('Simas', 'Palaukys', 'simka@one.lt');
-
-        $user->update([
-            'firstName' => $request->input('firstName'),
-            'lastName' => $request->input('lastName'),
-            'email' => $request->input('email'),
+        $request->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required|email',
         ]);
 
-        return redirect()->route('user.index'); // Redirect to user list page after update
+        return redirect()->route('save-success');
     }
 }

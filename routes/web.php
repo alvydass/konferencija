@@ -49,11 +49,10 @@ Route::prefix('admin')->group(function () {
 Route::prefix('user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user');
     Route::get('{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('{id}', [UserController::class, 'update'])->name('user.update');
+    Route::post('{id}/update', [UserController::class, 'update'])->name('user.update');
 });
 
-Route::post('/save-success', function () {
-    //return view('save_success');
+Route::match(['get', 'post'], '/save-success', function () {
     return "Save success";
 })->name('save-success');
 
