@@ -27,5 +27,6 @@
     "address": "address",
     "edit_user_details": "Edit user details",
     "add_new_conference": "Add new conference",
-    "delete": "Delete"
+    "delete": "Delete",
+    "login": "login"
 }

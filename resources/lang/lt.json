@@ -27,5 +27,6 @@
     "address": "Adresas",
     "edit_user_details": "Keisti vartotojo duomenis",
     "add_new_conference": "Pridėti naują konferenciją",
-    "delete": "Ištrinti"
+    "delete": "Ištrinti",
+    "login": "Prisijungti"
 }
