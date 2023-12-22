@@ -32,7 +32,7 @@ Route::prefix('employee')->group(function () {
 });
 
 Route::prefix('conference')->group(function () {
-    Route::get('show/{id}', [ConferenceController::class, 'show'])->name('conference.show');
+    Route::get('show/{conference}', [ConferenceController::class, 'show'])->name('conference.show');
     Route::get('conference/show-with-clients/{conference}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');

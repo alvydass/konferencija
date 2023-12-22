@@ -7,7 +7,7 @@
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
             <h3>{{ __('title') }}: {{ $conference->title }}</h3>
             <div>
-                <form action="{{ route('conference.show', ['id' => $conference->id, 'showClients' => false]) }}" method="GET" style="margin: 10px;">
+                <form action="{{ route('conference.show', ['conference' => $conference, 'showClients' => false]) }}" method="GET" style="margin: 10px;">
                     <button type="submit" class="btn btn-primary">{{ __('view') }}</button>
                 </form>
             </div>

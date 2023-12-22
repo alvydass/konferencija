@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
-class Client
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Client extends Model
 {
-    public $firstName;
-    public $lastName;
-    public $email;
+    use HasFactory;
 
-    public function __construct($firstName, $lastName, $email)
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+    ];
+
+    /**
+     * Relationship with conferences.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function conferences(): BelongsToMany
     {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
+        return $this->belongsToMany(Conference::class);
     }
-
-
 }

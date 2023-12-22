@@ -2,98 +2,35 @@
 
 namespace App\Models;
 
-class Conference
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+class Conference extends Model
 {
-    public $id;
-    public $title;
-    public $description;
-    public $lecturer;
-    public $date;
-    public $time;
-    public $address;
-    public $clients = [];
+    use HasFactory;
 
-    public function __construct($id, $title, $description)
-    {
-        $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
-    }
+    protected $fillable = [
+        'title',
+        'description',
+        'lecturer',
+        'date',
+        'time',
+        'address',
+    ];
 
-    public function addClient($client)
-    {
-        $this->clients[] = $client;
-    }
-
-    public function getClients()
-    {
-        return $this->clients;
-    }
+    protected $casts = [
+        'date' => 'date',
+        'time' => 'datetime',
+    ];
 
     /**
-     * @return mixed
+     * Relationship with clients.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function getLecturer()
+    public function clients(): BelongsToMany
     {
-        return $this->lecturer;
+        return $this->belongsToMany(Client::class);
     }
-
-    /**
-     * @param mixed $lecturer
-     */
-    public function setLecturer($lecturer): void
-    {
-        $this->lecturer = $lecturer;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate($date): void
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param mixed $time
-     */
-    public function setTime($time): void
-    {
-        $this->time = $time;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @param mixed $address
-     */
-    public function setAddress($address): void
-    {
-        $this->address = $address;
-    }
-
-
-
 }

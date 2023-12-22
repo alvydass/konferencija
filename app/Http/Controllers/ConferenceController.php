@@ -6,13 +6,12 @@ use App\Models\Client;
 use App\Models\Conference;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ConferenceController extends BaseController
 {
-    public function show($id)
+    public function show(Conference $conference)
     {
-        $conference = new Conference(1, 'AI threat', 'Call Arnie');
-
         return view('conference.show', compact('conference'));
     }
 
@@ -22,17 +21,17 @@ class ConferenceController extends BaseController
         return view('conference.show-with-clients', compact('conference'));
     }
 
-    public function register($id)
+    public function register($id): View
     {
-        $conference = new Conference('2', 'Titlas', 'descriptionas');
-
-        return view('conference.register', compact('conference'));
+        return view('conference.register', compact('id'));
     }
 
     public function submitRegistration(Request $request)
     {
 
-        return "Success";
+        //Take from request first name last name and email and create new client, map with conference and save to db.
+        $conferences = Conference::all();
+        return view('client.index', compact('conferences'));
     }
 
     public function list()
