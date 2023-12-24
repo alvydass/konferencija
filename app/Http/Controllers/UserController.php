@@ -2,38 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Conference;
 use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends BaseController
 {
-    public function index()
+    public function index(): View
     {
-        $client1 = new User('Simas', 'Palaukys', 'simka@one.lt');
-        $client2 = new User('Laurynas', 'Blynas', 'destroyer999@one.lt');
+        $clients = Client::all();
 
+        //dd($clients);
 
-        $users = [$client1, $client2];
-
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('clients'));
     }
 
-    public function edit($id)
+    public function edit($id) : View
     {
-        $user = new User('Simas', 'Palaukys', 'simka@one.lt');
+        $user = Client::findOrFail($id);
 
         return view('admin.user.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => 'required|email',
-        ]);
 
-        return redirect()->route('save-success');
+    $validatedData = $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+    ]);
+
+    $user = Client::findOrFail($id);
+
+    // Update the user details
+    $user->update($validatedData);
+
+    return redirect()->route('user');
     }
 }

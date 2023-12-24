@@ -6,7 +6,7 @@
     <p>{{ __('last_name') }}: Stanius</p>
     <p>{{ __('group') }}: PIT-20I-NT</p>
 
-    <p><a href="{{ route('client') }}" onclick="showLoading()">{{ __('client') }}</a></p>
-    <p><a href="{{ route('employee') }}" onclick="showLoading()">{{ __('employee') }}</a></p>
-    <p><a href="{{ route('admin') }}" onclick="showLoading()">{{ __('admin') }}</a></p>
+    <p><a href="{{ route('client') }}">{{ __('client') }}</a></p>
+    <p><a href="{{ route('employee') }}" >{{ __('employee') }}</a></p>
+    <p><a href="{{ route('admin') }}" >{{ __('admin') }}</a></p>
 @endsection

@@ -15,9 +15,9 @@ class ConferenceController extends BaseController
         return view('conference.show', compact('conference'));
     }
 
-    public function showWithClients($conference)
+    public function showWithClients( $conferenceId): View
     {
-        $conference = json_decode(base64_decode($conference));
+        $conference = Conference::with('clients')->findOrFail($conferenceId);
         return view('conference.show-with-clients', compact('conference'));
     }
 
@@ -29,7 +29,37 @@ class ConferenceController extends BaseController
     public function submitRegistration(Request $request)
     {
 
-        //Take from request first name last name and email and create new client, map with conference and save to db.
+      /*  $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email|unique:clients,email',
+        ]);*/
+
+
+        $conferenceId = $request->input('conference_id');
+        $firstName = $request->input('first_name');
+        $lastName = $request->input('last_name');
+        $email = $request->input('email');
+
+
+        $client = Client::create([
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'email' => $email,
+        ]);
+      /*  $client = new Client();
+        $client->first_name = $firstName;
+        $client->last_name = $lastName;
+        $client->email = $email;*/
+        //$client->save(); // Save the new client to the database
+
+        $conference = Conference::find($conferenceId);
+
+        if ($conference) {
+            $conference->clients()->attach($client);
+            $conference->save();
+        }
+
         $conferences = Conference::all();
         return view('client.index', compact('conferences'));
     }

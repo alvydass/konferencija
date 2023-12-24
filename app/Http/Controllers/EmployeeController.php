@@ -13,6 +13,7 @@ class EmployeeController extends BaseController
     {
 
         $conferences = Conference::all();
+       // dd($conferences);
 
         return view('employee.index', compact('conferences'));
     }

@@ -9,7 +9,7 @@
             <p>{{ __('description') }}: {{ $conference->description }}</p>
 
             <div style="margin-bottom: 20px;">
-                <form action="{{ route('conference.show-with-clients', ['conference' => base64_encode(json_encode($conference))]) }}" method="GET">
+                <form action="{{ route('conference.show-with-clients', ['conference_id' => $conference->id]) }}" method="GET">
                     <button type="submit" class="btn btn-primary">{{ __('view') }}</button>
                 </form>
             </div>

@@ -4,13 +4,13 @@
     <div class="container">
         <h1>{{ __('edit_user_details') }}</h1>
 
-        <form action="{{ route('user.update', 1) }}" method="POST">
+        <form action="{{ route('user.update', $user->id) }}" method="POST">
             @csrf
             @method('POST')
 
             <div class="form-group">
                 <label for="firstName">{{ __('first_name') }}</label>
-                <input type="text" name="firstName" id="firstName" value="{{ old('firstName', $user->firstName) }}" class="@error('firstName') is-invalid @enderror">
+                <input type="text" name="first_name" id="first_name" value="{{ old('firstName', $user->first_name) }}" class="@error('firstName') is-invalid @enderror">
                 @error('firstName')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="lastName">{{ __('last_name') }}</label>
-                <input type="text" name="lastName" id="lastName" value="{{ old('lastName', $user->lastName) }}" class="@error('lastName') is-invalid @enderror">
+                <input type="text" name="last_name" id="lastName" value="{{ old('lastName', $user->last_name) }}" class="@error('lastName') is-invalid @enderror">
                 @error('lastName')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

@@ -20,7 +20,7 @@ use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('main');
-});
+})->name('main');
 
 
 Route::prefix('client')->group(function () {
@@ -33,7 +33,8 @@ Route::prefix('employee')->group(function () {
 
 Route::prefix('conference')->group(function () {
     Route::get('show/{conference}', [ConferenceController::class, 'show'])->name('conference.show');
-    Route::get('conference/show-with-clients/{conference}', [ConferenceController::class, 'showWithClients'])->name('conference.show-with-clients');
+    Route::get('/conference/show-with-clients/{conference_id}', [ConferenceController::class, 'showWithClients'])
+        ->name('conference.show-with-clients');
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
     Route::get('/add', [ConferenceController::class, 'create'])->name('conference-add');
