@@ -15,7 +15,7 @@
                     <button style="margin-bottom: 5px" type="submit" class="btn btn-primary">{{ __('edit') }}</button>
                 </form>
 
-                <form method="POST" action="{{ route('save-success', ['id' => $conference->id]) }}" style="display: inline;">
+                <form method="POST" action="{{ route('conference-delete', ['id' => $conference->id]) }}" style="display: inline;">
                     @csrf
                     @method('POST')
                     <button style="margin-bottom: 5px" type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this conference?')">{{ __('delete') }}</button>

@@ -38,8 +38,10 @@ Route::prefix('conference')->group(function () {
     Route::get('register/{id}', [ConferenceController::class, 'register'])->name('conference.register');
     Route::post('/register', [ConferenceController::class, 'submitRegistration'])->name('conference.register.submit');
     Route::get('/add', [ConferenceController::class, 'create'])->name('conference-add');
+    Route::post('/store', [ConferenceController::class, 'store'])->name('conference-store');
     Route::get('/conference/edit/{encodedConference}', [ConferenceController::class, 'edit'])->name('conference-edit');
     Route::post('/conference/delete/{id}', [ConferenceController::class, 'delete'])->name('conference-delete');
+    Route::post('/conference/update/{id}', [ConferenceController::class, 'update'])->name('conference-update');
 });
 
 Route::prefix('admin')->group(function () {

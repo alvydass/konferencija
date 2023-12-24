@@ -3,7 +3,7 @@
 @section('content')
     <h1>Add New Conference</h1>
 
-    <form method="POST" action="{{ route('save-success') }}">
+    <form method="POST" action="{{ route('conference-store') }}">
         @csrf
         <div class="form-group">
             <label for="title">{{ __('title') }}:</label>

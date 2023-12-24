@@ -3,7 +3,7 @@
 @section('content')
     <h1>Edit Conference</h1>
 
-    <form method="POST" action="{{ route('save-success', ['id' => $conference->id]) }}">
+    <form method="POST" action="{{ route('conference-update', ['id' => $conference->id]) }}">
         @csrf
         <div class="form-group">
             <label for="title">{{ __('title') }}:</label>
@@ -34,6 +34,8 @@
             <label for="address">{{ __('address') }}:</label>
             <input type="text" name="address" class="form-control" value="{{ $conference->address }}" required>
         </div>
+
+        <input type="hidden" name="conference_id" value="{{ $conference->id }}">
 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>

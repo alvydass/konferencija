@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Conference;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 use Illuminate\View\View;
 
 class ConferenceController extends BaseController
@@ -66,30 +67,7 @@ class ConferenceController extends BaseController
 
     public function list()
     {
-        $conference1 = new Conference(1, 'AI threat', 'Call Arnie');
-        $conference1->setLecturer("Tadas Ivanauskas");
-        $conference1->setAddress("Rugpieniu kaimas");
-        $conference1->setDate("2023-10-11");
-        $conference1->setTime("15:30:00");
-        $client1 = new Client('Simas', 'Palaukys', 'simka@one.lt');
-        $client2 = new Client('Laurynas', 'Blynas', 'destroyer999@one.lt');
-
-        $conference1->addClient($client1);
-        $conference1->addClient($client2);
-
-
-        $conference2 = new Conference(2, 'Online learning', 'How to use Udemy');
-        $conference2->setLecturer("Pranis Sasnauskas");
-        $conference2->setAddress("Daujotu kaimas");
-        $conference2->setDate("2023-11-14");
-        $conference2->setTime("10:30:00");
-        $client3 = new Client('Petras', 'Stauskas', 'piotr@one.lt');
-        $client4 = new Client('Virga', 'Pac', 'vir@one.lt');
-
-        $conference2->addClient($client3);
-        $conference2->addClient($client4);
-        $conferences = [$conference1, $conference2];
-
+        $conferences = Conference::all();
         return view('admin.conference.conferences', compact('conferences'));
     }
 
@@ -100,30 +78,71 @@ class ConferenceController extends BaseController
 
     public function store(Request $request)
     {
-        // Validate
+       /* // Validate incoming request
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'lecturer' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+            'address' => 'required|string|max:255',
+        ]);*/
 
-        $conference = new Conference();
+        // Redirect back if validation fails
+        /*if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }*/
+
+        // Create a new conference instance
+        $newConference = Conference::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'lecturer' => $request->input('lecturer'),
+            'date' => $request->input('date'),
+            'time' => $request->input('time'),
+            'address' => $request->input('address'),
+            // Add other conference attributes if needed
+        ]);
+
+        // Redirect to the conference list view if successful
+        return redirect()->route('conference.list')->with('success', 'Conference created successfully!');
+    }
+
+    public function update(Request $request)
+    {
+        // Find the conference by its ID
+        $conferenceId = $request->input('conference_id');
+        $conference = Conference::findOrFail($conferenceId);
+
+        // Update conference attributes with request data
         $conference->title = $request->input('title');
         $conference->description = $request->input('description');
+        $conference->lecturer = $request->input('lecturer');
+        $conference->date = $request->input('date');
+        $conference->time = $request->input('time');
+        $conference->address = $request->input('address');
+        // Add/update other conference attributes if needed
+
+        // Save the updated conference
         $conference->save();
 
-        return redirect()->route('save-success');
+        // Redirect to the conference list view if successful
+        return redirect()->route('conference.list')->with('success', 'Conference updated successfully!');
     }
 
     public function edit($encodedConference)
     {
         $conference = json_decode(base64_decode($encodedConference));
-        //dd($conference);
 
         return view('conference.edit', compact('conference'));
     }
 
     public function delete($id)
     {
-       /* $conference = Conference::findOrFail($id);
-        $conference->delete();*/
+      $conference = Conference::findOrFail($id);
+        $conference->delete();
 
-        return redirect()->route('save-success');
+        return redirect()->route('conference.list')->with('success', 'Conference deleted successfully!');
     }
 
 }
