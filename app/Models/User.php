@@ -2,18 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticable;
 
-class User extends Model
+class User extends Authenticable
 {
-    public $firstName;
-    public $lastName;
-    public $email;
+    protected $fillable = [
+        'name', 'email', 'password',
+    ];
 
-    public function __construct($firstName, $lastName, $email)
-    {
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-    }
+    // Other properties and methods...
 }

@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AuthenticateCustom;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\ClientController;
@@ -18,7 +21,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/main', function () {
     return view('main');
 })->name('main');
 
@@ -59,10 +62,23 @@ Route::match(['get', 'post'], '/save-success', function () {
     return "Save success";
 })->name('save-success');
 
-Route::get('/login', function () {
-    return "Login Page";
-})->name('login');
+
+Route::middleware([AuthenticateCustom::class])->group(function () {
+    Route::get('/', function () {
+        return view('main');
+    })->name('main');
+});
+
+// Route to show the login form
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+// Route to handle login logic
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
+
 
 Route::get('/logout', function () {
-    return "Logged out";
+    return view('login');
 })->name('logout');
