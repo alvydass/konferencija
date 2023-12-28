@@ -35,4 +35,10 @@ class LoginController
 
         return back()->withErrors(['message' => 'Invalid credentials']);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
 }

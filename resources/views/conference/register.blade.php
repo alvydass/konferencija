@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Register to Conference</h1>
+    <h1>{{ __('register_conference') }}</h1>
 
     <form action="{{ route('conference.register.submit') }}" method="POST">
         @csrf

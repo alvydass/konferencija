@@ -78,7 +78,5 @@ Route::post('/login', [LoginController::class, 'authenticate'])->name('login.aut
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/logout', function () {
-    return view('login');
-})->name('logout');

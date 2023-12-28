@@ -28,5 +28,12 @@
     "edit_user_details": "Edit user details",
     "add_new_conference": "Add new conference",
     "delete": "Delete",
-    "login": "login"
+    "login": "login",
+    "password": "password",
+    "logout": "Logout",
+    "dont_have": "Don't have an account?",
+    "register_here": "Register here",
+    "confirm_password": "Confirm password",
+    "main": "Main",
+    "register_conference": "Register to Conference"
 }

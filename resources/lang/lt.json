@@ -28,5 +28,12 @@
     "edit_user_details": "Keisti vartotojo duomenis",
     "add_new_conference": "Pridėti naują konferenciją",
     "delete": "Ištrinti",
-    "login": "Prisijungti"
+    "login": "Prisijungti",
+    "password": "Slaptažodis",
+    "logout": "Atsijungti",
+    "dont_have": "Neužsiregistravęs?",
+    "register_here": "Registruotis čia",
+    "confirm_password": "Pakartoti slaptažodį",
+    "main": "Pagrindinis",
+    "register_conference": "Registruotis į konferenciją"
 }
